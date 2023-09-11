@@ -1,24 +1,49 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
+import axios from 'axios';
+const token = process.env.NEXT_PUBLIC_MOVIESDB_API_KEY;
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+const api_key = process.env.NEXT_PUBLIC_MOVIESDB_API_KEY;
 const initialState = {
 	allMovies: [],
-	activeMovie: {},
+	movie: {},
 	moviesLoading: false,
 	moviesError: '',
 	movieLoading: false,
 	movieError: '',
 };
 
-export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
-	const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=1a4f4b9f5c5f6e7c6f9c8d7e6f5d4c3b');
-	const data = await response.json();
-	return data.results;
+console.log(token);
+export const searchMovie = createAsyncThunk('movies/searchMovies', async (query) => {
+	const { data } = await axios.get(`${baseUrl}/search/movie?query=${query}`, {
+		headers: {
+			'Authorization': `Bearer ${token}`,
+		},
+		contentType: 'application/json',
+	});
+	console.log(data);
+	return data?.results;
 });
 
-export const fetchMovie = createAsyncThunk('movies/fetchMovies', async () => {
-	const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=1a4f4b9f5c5f6e7c6f9c8d7e6f5d4c3b');
-	const data = await response.json();
-	return data.results;
+export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
+	const { data } = await axios.get(`${baseUrl}/movie/popular?api_key=${api_key}`, {
+		headers: {
+			'Authorization': `Bearer ${token}`,
+		},
+		contentType: 'application/json',
+	});
+	console.log(data);
+	return data?.results;
+});
+
+export const fetchMovie = createAsyncThunk('movies/fetchMovie', async (id) => {
+	const { data } = await axios.get(`${baseUrl}/movie/${id}`, {
+		headers: {
+			'Authorization': `Bearer ${token}`,
+		},
+		contentType: 'application/json',
+	});
+	console.log(data);
+	return data;
 });
 
 const movieSlice = createSlice({
@@ -42,7 +67,7 @@ const movieSlice = createSlice({
 		});
 		builder.addCase(fetchMovie.fulfilled, (state, action) => {
 			state.movieLoading = false;
-			state.activeMovie = action.payload;
+			state.movie = action.payload;
 		});
 		builder.addCase(fetchMovie.rejected, (state, action) => {
 			state.movieLoading = false;
@@ -52,3 +77,7 @@ const movieSlice = createSlice({
 });
 
 export default movieSlice.reducer;
+
+// https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg
+// https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png
+// https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png
