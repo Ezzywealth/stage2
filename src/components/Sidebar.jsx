@@ -43,7 +43,7 @@ const Sidebar = () => {
 			</div>
 			<ul className='flex-grow mt-12 w-full '>
 				{navLinks.map((link) => (
-					<Link href={link?.path}>
+					<Link href={link?.path ? link?.path : '/'}>
 						<li onClick={() => handleNavClick(link.id)} key={link.id} className={`transition-all ease-in-out duration-300 p-[25px] text-xl cursor-pointer flex items-center gap-[15px] font-semibold  hover:bg-[rgba(190, 18, 60, 0.10)] ${active === link.id ? 'bg-[#BE123C1A]/10 text-[#BE123C]' : 'text-[#666666]'}`}>
 							<Image src={link.icon} layout='intrisic' height={25} width={25} />
 							{link.name}
