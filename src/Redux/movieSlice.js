@@ -21,7 +21,6 @@ export const searchMovies = createAsyncThunk('movies/searchMovies', async (query
 		},
 		contentType: 'application/json',
 	});
-	console.log(data.query);
 	data.query = query;
 	return data;
 });
@@ -33,7 +32,6 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
 		},
 		contentType: 'application/json',
 	});
-	console.log(data);
 	return data?.results;
 });
 

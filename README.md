@@ -81,14 +81,14 @@ To clone this repository to your desired folder, follow the steps below:
 
 ```sh
   cd my-folder
-  git clone git@github.com:Ezzywealth/must_fintech.git
+  git clone https://github.com/Ezzywealth/stage2.git
 ```
 
 **Using GitHub Desktop app**
 
 - Follow the steps below
 
-  - Visit this link [click me](https://github.com/Ezzywealth/must_fintech)
+  - Visit this link [click me](https://github.com/Ezzywealth/stage2)
   - Click the green button labelled "code"
   - Select the "Open with GitHub Desktop" option
   - After the GitHub Desktop add opens, click the "clone repo" button
@@ -97,19 +97,18 @@ To clone this repository to your desired folder, follow the steps below:
 
 To run the project, execute the following command:
 
-**Click the "Go Live" button on your IDE(VS Code in this case)**
-or
-
-**run `npm run dev` on your terminal**
+**run `npm install` on your terminal** to install the necessary dependencies
+**run `npm run dev` on your terminal** to run the project locally
 
 ### Deployment
 
 You can deploy this project by:
 
-- visiting your repository on [GitHub](https://github.com)
-- Click on settings
-- Go to the "Pages" option
-- Select the dev branch and save
+- visiting your repository on [Vercel](https://vercel.com/)
+- Signup / Signin
+- Connect your github repo to vercel
+- Add project from github
+- Select the main branch and host
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -119,12 +118,14 @@ You can deploy this project by:
 
 - GitHub: [@Ezzywealth](https://github.com/Ezzywealth)
 - Twitter: [@EzzyWealth](https://twitter.com/EzzyWealth)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/ezekiel-udiomuno-b14539150/)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/ezekiel-udiomuno)
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Sort by Authorization and Approval date**
-- [ ] **Registration of new members**
+- [ ] **Complete like functionality integrating TMDB api**
+- [ ] **Registration of new users**
+- [ ] **Improved Navigation**
+- [ ] **Watch Trailer**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -142,7 +143,7 @@ If you like this project, give it a `star` and let me know what you like in part
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank the whole Must Fintech team for giving me this opportunity to build this project.
+I would like to thank the HNG team for giving me this opportunity to build this project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
