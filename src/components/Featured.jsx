@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
+import { likeMovie } from '@/Redux/movieSlice';
 
 const Featured = () => {
 	const { moviesLoading, moviesError, allMovies, searchQuery } = useSelector((state) => state.movies);
 	const [movies, setMovies] = useState([]);
 	const [isMore, setIsMore] = useState(false);
-	const [isLiked, setIsLiked] = useState(false);
-
+	const dispatch = useDispatch();
 	useEffect(() => {
 		setMovies(allMovies.slice(0, 10));
 	}, [allMovies]);
@@ -26,7 +26,7 @@ const Featured = () => {
 	};
 
 	const handleLike = (id) => {
-		setIsLiked(!isLiked);
+		dispatch(likeMovie(id));
 	};
 
 	return (
@@ -48,7 +48,7 @@ const Featured = () => {
 					{movies.map((movie) => (
 						<div data-testid='movie-card' key={movie?.id} className='bg-white p-4 rounded-lg shadow-md hover:scale-105 transition-all duration-300 ease-in-out relative'>
 							<button type='button' onClick={() => handleLike(movie?.id)} className='absolute z-[10000000] top-8 right-8 bg-gray-300 rounded-full p-1'>
-								{isLiked ? <AiTwotoneHeart size={25} color='#BE123C' /> : <AiOutlineHeart size={25} />}
+								{movie?.liked ? <AiTwotoneHeart size={25} color='#BE123C' /> : <AiOutlineHeart size={25} />}
 							</button>
 							<Link href={`/movies/${movie?.id}`}>
 								<div className='relative'>

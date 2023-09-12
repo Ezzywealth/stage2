@@ -50,7 +50,16 @@ export const fetchMovie = createAsyncThunk('movies/fetchMovie', async (id) => {
 const movieSlice = createSlice({
 	name: 'movies',
 	initialState,
-	reducers: {},
+	reducers: {
+		likeMovie: (state, action) => {
+			state.allMovies.map((movie) => {
+				if (movie.id === action.payload) {
+					movie.vote_count = movie.liked ? movie.vote_count - 1 : movie.vote_count + 1;
+					movie.liked = !movie.liked;
+				}
+			});
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchMovies.pending, (state) => {
 			state.moviesLoading = true;
@@ -58,7 +67,10 @@ const movieSlice = createSlice({
 		builder.addCase(fetchMovies.fulfilled, (state, action) => {
 			state.moviesLoading = false;
 			state.movieError = '';
-			state.allMovies = action.payload;
+			state.allMovies = action.payload.map((movie) => {
+				movie.liked = false;
+				return movie;
+			});
 			state.featuredMovie = action.payload[0];
 		});
 		builder.addCase(fetchMovies.rejected, (state, action) => {
@@ -87,7 +99,10 @@ const movieSlice = createSlice({
 		builder.addCase(searchMovies.fulfilled, (state, action) => {
 			state.moviesError = '';
 			state.moviesLoading = false;
-			state.allMovies = action.payload.results;
+			state.allMovies = action.payload.results.map((movie) => {
+				movie.liked = false;
+				return movie;
+			});
 			state.searchQuery = action.payload.query;
 			state.featuredMovie = action.payload.results[0];
 		});
@@ -100,6 +115,7 @@ const movieSlice = createSlice({
 });
 
 export default movieSlice.reducer;
+export const { likeMovie } = movieSlice.actions;
 
 // https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg
 // https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png
