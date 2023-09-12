@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import { ColorRing } from 'react-loader-spinner';
+import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
 
 const Featured = () => {
 	const { moviesLoading, moviesError, allMovies, searchQuery } = useSelector((state) => state.movies);
 	const [movies, setMovies] = useState([]);
 	const [isMore, setIsMore] = useState(false);
+	const [isLiked, setIsLiked] = useState(false);
 
 	useEffect(() => {
 		setMovies(allMovies.slice(0, 10));
@@ -22,6 +23,10 @@ const Featured = () => {
 	const handleLess = () => {
 		setMovies(allMovies.slice(0, 10));
 		setIsMore(false);
+	};
+
+	const handleLike = (id) => {
+		setIsLiked(!isLiked);
 	};
 
 	return (
@@ -41,9 +46,14 @@ const Featured = () => {
 				</div>
 				<div className='gap-y-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 py-8'>
 					{movies.map((movie) => (
-						<Link href={`/movies/${movie?.id}`} key={movie?.id}>
-							<div data-testid='movie-card' key={movie?.id} className='bg-white p-4 rounded-lg shadow-md hover:scale-105 transition-all duration-300 ease-in-out'>
-								<img data-testid='movie-poster' src={movie?.poster_path ? `https://image.tmdb.org/t/p/original${movie?.poster_path}` : '/assets/images/default.jpg'} alt={movie.title} className='w-full h-[350px] mb-2' />
+						<div data-testid='movie-card' key={movie?.id} className='bg-white p-4 rounded-lg shadow-md hover:scale-105 transition-all duration-300 ease-in-out relative'>
+							<button type='button' onClick={() => handleLike(movie?.id)} className='absolute z-[10000000] top-8 right-8 bg-gray-300 rounded-full p-1'>
+								{isLiked ? <AiTwotoneHeart size={25} color='#BE123C' /> : <AiOutlineHeart size={25} />}
+							</button>
+							<Link href={`/movies/${movie?.id}`}>
+								<div className='relative'>
+									<img data-testid='movie-poster' src={movie?.poster_path ? `https://image.tmdb.org/t/p/original${movie?.poster_path}` : '/assets/images/default.jpg'} alt={movie.title} className='w-full h-[350px] mb-2' />
+								</div>
 								<section className='flex flex-col gap-2'>
 									<p className='text-[#9CA3AF] text-[12px] font-bold uppercase' data-testid='movie-title'>
 										{movie?.original_language}, <span data-testid='movie-release-date'>{movie?.release_date ? new Date(movie?.release_date).toUTCString() : 'No release date'}</span>
@@ -62,8 +72,8 @@ const Featured = () => {
 										</div>
 									</div>
 								</section>
-							</div>
-						</Link>
+							</Link>
+						</div>
 					))}
 				</div>
 			</div>

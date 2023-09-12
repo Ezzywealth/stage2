@@ -28,12 +28,12 @@ const Navbar = () => {
 		}
 	}, [moviesLoading]);
 
-	console.log(openForm);
 	const handleMenu = () => {
 		setOpenForm(!openForm);
 	};
+
 	return (
-		<nav className={`px-4 md:px-8 py-3 z-[100000] shadow-md transition-all duration-300 ease-in-out fixed top-0 left-0 w-full ${height >= 150 ? 'bg-white' : 'bg-none'}`}>
+		<nav className={`px-4 md:px-8 py-3 z-[999999999] shadow-md transition-all duration-300 ease-in-out fixed top-0 left-0 w-full ${height >= 150 ? 'bg-white' : 'bg-none'}`}>
 			<section className='relative'>
 				<div className='container mx-auto flex justify-between items-center'>
 					<div className='text-white text-2xl font-bold'>
