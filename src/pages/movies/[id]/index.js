@@ -25,8 +25,8 @@ const Index = () => {
 	}
 
 	return (
-		<main className='grid md:grid-cols-7 lg:grid-cols-10 h-screen overscroll-auto'>
-			<section className='hidden md:flex col-span-2 h-screen '>
+		<main className='grid md:grid-cols-7 lg:grid-cols-10 h-screen overscroll-auto box-border'>
+			<section className='hidden md:flex col-span-2 h-screen z-[10000000] '>
 				<Sidebar />
 			</section>
 			{movieLoading ? (
@@ -40,24 +40,24 @@ const Index = () => {
 							<h1 className='text-red-500 text-2xl font-bold'>{movieError}</h1>
 						</section>
 					) : (
-						<article className='md:col-span-5 lg:col-span-8 px-4 md:px-8 py-20 md:py-12 block w-full h-screen overflow-auto'>
+						<article className='md:col-span-5 lg:col-span-8 z-[1000] px-4 md:px-8 py-20 md:py-12 block w-full h-screen overflow-auto'>
 							<section className='fixed top-0 md:hidden mb-8'>
 								<DetailsNav />
 							</section>
-							<div className='w-full h-[400px]  relative'>
-								<Image layout='fill' objectFit='cover' data-testid='movie-poster' src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`} alt={movie?.title} className='w-full rounded-xl' priority />
+							<div className='w-full h-[400px]  relative flex-wrap'>
+								<Image layout='fill' objectFit='cover' data-testid='movie-poster' src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`} alt={movie?.title} className='w-full rounded-xl z-[10]' priority />
 							</div>
 							<section>
 								<div className='flex justify-between mb-12'>
 									<div className='flex flex-wrap font-semibold gap-3 items-center text-base mt-4 text-[#404040]'>
-										<h1 data-testid='movie-title' className='m-0 text-2xl w-full md:w-auto font-bold'>
+										<h1 data-testid='movie-title' className='m-0 text-2xl w-auto font-bold'>
 											{movie?.title}
 										</h1>
 										.<p data-testid='movie-release-date'>{new Date(movie?.release_date).getFullYear()}</p>.<p>PG-{movie?.adult ? '18' : '13'}</p>.
 										<p data-testid='movie-runtime'>
 											{Math.floor(movie?.runtime / 60)}h {movie?.runtime % 60}m
 										</p>
-										<ul className='flex items-center gap-2 text-[#B91C1C] text-[15px] font-[500]'>
+										<ul className='flex items-center gap-2 text-[#B91C1C] w-full md:w-auto flex-wrap text-[15px] font-[500]'>
 											{movie?.genres?.map((genre) => (
 												<li className='shadow-lg border border-[#F8E7EB]  px-4 flex items-center justify-center rounded-xl' key={genre.id}>
 													{genre?.name}
