@@ -41,19 +41,20 @@ const Index = () => {
 						</section>
 					) : (
 						<article className='md:col-span-5 lg:col-span-8 z-[1000] px-4 md:px-8 py-20 md:py-12 block w-full h-screen overflow-auto'>
-							<section className='fixed top-0 md:hidden mb-8'>
+							<section className='fixed z-[10000000] top-0 md:hidden mb-8'>
 								<DetailsNav />
 							</section>
-							<div className='w-full h-[400px]  relative flex-wrap'>
+							<div className='w-full h-[400px] z-[0]  relative flex-wrap'>
 								<Image layout='fill' objectFit='cover' data-testid='movie-poster' src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`} alt={movie?.title} className='w-full rounded-xl z-[10]' priority />
 							</div>
 							<section>
 								<div className='flex justify-between mb-12'>
 									<div className='flex flex-wrap font-semibold gap-3 items-center text-base mt-4 text-[#404040]'>
-										<h1 data-testid='movie-title' className='m-0 text-2xl w-auto font-bold'>
+										<h1 data-testid='movie-title' className='m-0 text-xl md:text-2xl w-auto font-bold'>
 											{movie?.title}
 										</h1>
-										.<p data-testid='movie-release-date'>{new Date(movie?.release_date).getFullYear()}</p>.<p>PG-{movie?.adult ? '18' : '13'}</p>.
+										<p data-testid='movie-release-date'>{new Date(movie?.release_date).getFullYear()}</p>
+										<p>PG-{movie?.adult ? '18' : '13'}</p>
 										<p data-testid='movie-runtime'>
 											{Math.floor(movie?.runtime / 60)}h {movie?.runtime % 60}m
 										</p>

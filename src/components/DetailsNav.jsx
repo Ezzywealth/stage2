@@ -22,7 +22,7 @@ const DetailsNav = () => {
 	}, [height]);
 
 	return (
-		<nav className={`px-4 md:px-8 py-3 z-[99999999] shadow-md transition-all duration-300 ease-in-out fixed top-0 left-0 w-full ${height >= 150 ? 'bg-white' : 'bg-[#333]'}`}>
+		<nav className={`px-4 md:px-8 py-3 z-[999999999] shadow-md transition-all duration-300 ease-in-out fixed top-0 left-0 w-full ${height >= 150 ? 'bg-white' : 'bg-[#333]'}`}>
 			<section className='relative'>
 				<div className='container mx-auto flex justify-center items-center'>
 					<div className='text-white text-center text-2xl font-bold'>
