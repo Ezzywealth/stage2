@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Sidebar from '@/components/Sidebar';
 import Image from 'next/image';
 import { ColorRing } from 'react-loader-spinner';
+import DetailsNav from '@/components/DetailsNav';
 const Index = () => {
 	const { movieLoading, movieError, movie } = useSelector((state) => state.movies);
 	const dispatch = useDispatch();
@@ -41,7 +42,10 @@ const Index = () => {
 					<ColorRing visible={true} height='80' width='80' ariaLabel='blocks-loading' wrapperStyle={{}} wrapperClass='blocks-wrapper' colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']} />
 				</section>
 			) : (
-				<article className='md:col-span-5 lg:col-span-8 px-4 md:px-8 py-12 block w-full h-screen overflow-auto'>
+				<article className='md:col-span-5 lg:col-span-8 px-4 md:px-8 py-20 md:py-12 block w-full h-screen overflow-auto'>
+					<section className='fixed top-0 md:hidden mb-8'>
+						<DetailsNav />
+					</section>
 					<div className='w-full h-[400px]  relative'>
 						<Image layout='fill' objectFit='cover' data-testid='movie-poster' src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`} alt={movie?.title} className='w-full rounded-xl' priority />
 					</div>
