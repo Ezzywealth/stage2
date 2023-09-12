@@ -6,6 +6,7 @@ import Sidebar from '@/components/Sidebar';
 import Image from 'next/image';
 import { ColorRing } from 'react-loader-spinner';
 import DetailsNav from '@/components/DetailsNav';
+import { AiFillStar } from 'react-icons/ai';
 const Index = () => {
 	const { movieLoading, movieError, movie } = useSelector((state) => state.movies);
 	const dispatch = useDispatch();
@@ -22,6 +23,21 @@ const Index = () => {
 			return;
 		}
 		return price.toLocaleString(undefined, { minimumFractionDigits: 2 });
+	}
+
+	function formatNumber(number) {
+		if (isNaN(number)) return 'Invalid Number';
+		if (number < 1000) return number.toString();
+
+		const abbreviations = ['K', 'M', 'B', 'T']; // Add more as needed
+		let index = 0;
+
+		while (number >= 1000 && index < abbreviations.length) {
+			number /= 1000;
+			index++;
+		}
+
+		return number.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + abbreviations[index - 1];
 	}
 
 	return (
@@ -51,7 +67,7 @@ const Index = () => {
 								<div className='flex justify-between mb-12'>
 									<div className='flex flex-wrap font-semibold gap-3 items-center text-base mt-4 text-[#404040]'>
 										<h1 data-testid='movie-title' className='m-0 text-xl md:text-2xl w-auto font-bold'>
-											{movie?.title}
+											{movie?.title},
 										</h1>
 										<p data-testid='movie-release-date'>{new Date(movie?.release_date).getFullYear()}</p>
 										<p>PG-{movie?.adult ? '18' : '13'}</p>
@@ -67,53 +83,48 @@ const Index = () => {
 										</ul>
 									</div>
 									<div className=' flex items-start pt-4  w-fit gap-1'>
-										<section className='flex w-6 h-6 gap-4'>
-											<Image src='/assets/images/star.svg' alt='Star' width={10} height={10} layout='intrisic' className='w-6 h-6' />
-										</section>
+										<AiFillStar size={25} color='yellow' />
+
 										<section className='flex'>{movie?.vote_average?.toFixed(1)}</section>
 										<section className='flex gap-2 ml-1 items-center'>
 											<span>|</span>
-											<span>{movie?.vote_count}</span>
+											<span>{formatNumber(movie?.vote_count)}</span>
 										</section>
 									</div>
 								</div>
 								<section className='grid md:grid-cols-3 gap-6'>
 									<article className='col-span-2 flex flex-col gap-3'>
 										<div className='flex  gap-4'>
-											<p data-testid='movie-overview' className='text-[#333333] text-lg font-semibold'>
+											<p data-testid='movie-overview' className='text-[#333333] text-[14px] md:text-base font-semibold'>
 												{movie?.overview}
 											</p>
 										</div>
-										<div className='flex  gap-4'>
-											<p className='font-semibold text-base'>Revenue :</p>
-											<p data-testid='movie-overview' className='text-[#B91C1C] text-lg font-semibold'>
-												${formatPrice(movie?.revenue)}
-											</p>
+										<div className='flex flex-wrap gap-4'>
+											<p className='font-semibold text-[14px] md:text-base'>Revenue :</p>
+											<p className='text-[#B91C1C] text-[14px] md:text-basefont-semibold'>${formatPrice(movie?.revenue)}</p>
 										</div>
-										<div className='flex  gap-4'>
-											<p className='font-semibold text-base'>Spoken Languages :</p>
-											<ul data-testid='movie-overview' className='flex items-center gap-2 text-[#B91C1C] text-[15px] font-[500]'>
+										<div className='flex flex-wrap gap-4'>
+											<p className='font-semibold text-[14px] md:text-base'>Spoken Languages :</p>
+											<ul className='flex items-center gap-2 text-[#B91C1C] text-[14px] md:text-base font-[500]'>
 												{movie?.spoken_languages?.map((lang) => (
-													<p className='shadow-lg border border-[#F8E7EB]  px-4 flex items-center justify-center rounded-lg' key={lang.id}>
+													<p className='border border-[#F8E7EB]  px-4 flex items-center justify-center rounded-lg' key={lang.id}>
 														{lang?.english_name}
 													</p>
 												))}
 											</ul>
 										</div>
-										<div className='flex  gap-4'>
-											<p className='font-semibold text-base'>Tag line :</p>
-											<p data-testid='movie-overview' className='text-[#B91C1C] text-lg font-semibold'>
-												{movie?.tagline}
-											</p>
+										<div className='flex flex-wrap gap-2'>
+											<p className='font-semibold flex text-[14px] md:text-base'>Tag line :</p>
+											<p className='text-[#B91C1C] flex-wrap text-[14px] md:text-base font-semibold'>{movie?.tagline}</p>
 										</div>
 									</article>
 									<article className='col-span-1'>
 										<div className='flex flex-col gap-2'>
-											<button className='bg-[#BE123C] py-2 px-4  gap-2 rounded-xl text-white flex justify-center items-center'>
+											<button className='bg-[#BE123C] py-1 md:py-2 px-2 md:px-4  gap-2 rounded-xl text-white flex justify-center items-center'>
 												<Image src='/assets/images/Two Tickets.svg' alt='Star' width={10} height={10} layout='intrisic' className='w-auto ' />
 												See Showtimes
 											</button>
-											<button className='bg-[#BE123C1A]/10 py-2 px-2 gap-4 rounded-xl border border-[#BE123C] text-[#333333]  flex justify-center items-center'>
+											<button className='bg-[#BE123C1A]/10 py-1 md:py-2 px-2 md:px-4 gap-4 rounded-xl border border-[#BE123C] text-[#333333]  flex justify-center items-center'>
 												<Image src='/assets/images/List.svg' alt='Star' width={10} height={10} layout='intrisic' className='w-auto ' />
 												More watch options
 											</button>
