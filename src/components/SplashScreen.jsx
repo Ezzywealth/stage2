@@ -21,6 +21,8 @@ const SplashScreen = () => {
 			</section>
 		);
 	}
+
+	if (featuredMovie === undefined) return null;
 	return (
 		<section className='text-white w-full  flex px-4 justify-center items-center'>
 			<div className='container mx-auto md:mx-16'>
