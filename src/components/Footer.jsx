@@ -18,12 +18,12 @@ const Footer = () => {
 						<img src='/assets/images/yt.svg' alt='youtube' className='w-6 h-6' />
 					</a>
 				</div>
-				<div className='flex flex-col md:flex-row gap:3 items-center md:gap-8 text-[#111827] font-bold text-lg justify-center'>
+				<div className='flex flex-col md:flex-row gap:3 items-center md:gap-8 text-[#111827] font-bold text-sm md:text-lg justify-center'>
 					<p>Conditions of Use</p>
 					<p>Privacy & Policy</p>
 					<p>Press Room</p>
 				</div>
-				<div className='flex mb-8 text-[#6B7280] font-bold text-lg justify-center'>&copy; {new Date().getFullYear()} Ziks Movies by Ezzywealth</div>
+				<div className='flex mb-8 text-[#6B7280] font-bold text-sm md:text-lg justify-center'>&copy; {new Date().getFullYear()} Ziks Movies by Ezzywealth</div>
 			</div>
 		</footer>
 	);

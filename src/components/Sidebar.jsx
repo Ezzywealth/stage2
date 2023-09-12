@@ -41,10 +41,10 @@ const Sidebar = () => {
 				<Image src='/assets/images/logo.svg' layout='intrisic' height={50} width={50} />
 				<h1 className='text-[#333333] text-[24px] font-bold'>Zik Movies</h1>
 			</div>
-			<ul className='flex-grow mt-12 w-full '>
+			<ul className='flex-grow mt-10 w-full '>
 				{navLinks.map((link) => (
 					<Link href={link?.path ? link?.path : '/'}>
-						<li onClick={() => handleNavClick(link.id)} key={link.id} className={`transition-all ease-in-out duration-300 p-[25px] text-xl cursor-pointer flex items-center gap-[15px] font-semibold  hover:bg-[rgba(190, 18, 60, 0.10)] ${active === link.id ? 'bg-[#BE123C1A]/10 text-[#BE123C]' : 'text-[#666666]'}`}>
+						<li onClick={() => handleNavClick(link.id)} key={link.id} className={`transition-all ease-in-out duration-300 p-[16px] text-xl cursor-pointer flex items-center gap-[15px] font-semibold  hover:bg-[rgba(190, 18, 60, 0.10)] ${active === link.id ? 'bg-[#BE123C1A]/10 text-[#BE123C]' : 'text-[#666666]'}`}>
 							<Image src={link.icon} layout='intrisic' height={25} width={25} />
 							{link.name}
 						</li>

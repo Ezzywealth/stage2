@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { searchMovies } from '@/Redux/movieSlice';
+
 const Form = () => {
 	const [searchQuery, setSearchQuery] = useState('');
 	const dispatch = useDispatch();

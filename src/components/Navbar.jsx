@@ -38,9 +38,9 @@ const Navbar = () => {
 				<div className='container mx-auto flex justify-between items-center'>
 					<div className='text-white text-2xl font-bold'>
 						<Link href='/'>
-							<div className='md:p-4 text-xl flex items-center gap-3 font-bold'>
-								<Image src='/assets/images/logo.svg' layout='intrisic' height={30} width={30} />
-								<h1 className={`${height >= 150 ? 'text-[#333]' : 'text-white'} text-[24px] font-bold`}>Zik Movies</h1>
+							<div className='md:p-2 text-xl flex items-center gap-3 font-bold'>
+								<Image src='/assets/images/logo.svg' layout='intrisic' height={25} width={25} />
+								<h1 className={`${height >= 150 ? 'text-[#333]' : 'text-white'} text-[20px] font-bold`}>Zik Movies</h1>
 							</div>
 						</Link>
 					</div>

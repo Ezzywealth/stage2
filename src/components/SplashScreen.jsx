@@ -36,8 +36,8 @@ const SplashScreen = () => {
 							<p>{featuredMovie?.vote_count}</p>
 						</div>
 					</div>
-					<p>{featuredMovie?.overview}</p>
-					<button className='bg-[#BE123C] flex items-center justify-center rounded-lg py-4 px-6 gap-4 w-full md:w-[80%] lg:w-[70%]'>
+					<p className='w-full md:w-[80%]'>{featuredMovie?.overview}</p>
+					<button className='bg-[#BE123C] flex items-center justify-center rounded-lg py-4 px-6 gap-4 w-full md:w-[80%] lg:w-[50%]'>
 						<Image src='/assets/images/trailer.svg' alt='trailer' layout='intrisic' height={10} width={10} className='w-6 h-6' />
 						Watch Trailer
 					</button>
