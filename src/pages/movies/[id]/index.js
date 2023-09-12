@@ -23,6 +23,14 @@ const Index = () => {
 		return price.toLocaleString(undefined, { minimumFractionDigits: 2 });
 	}
 
+	if (movieError) {
+		return (
+			<section className='bg-gray-50 w-full h-screen flex justify-center items-center'>
+				<h1 className='text-red-500 text-2xl font-bold'>{movieError}</h1>
+			</section>
+		);
+	}
+
 	return (
 		<main className='grid md:grid-cols-7 lg:grid-cols-10 h-screen overscroll-auto'>
 			<section className='hidden md:flex col-span-2 h-screen '>

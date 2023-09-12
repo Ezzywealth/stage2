@@ -10,18 +10,20 @@ const initialState = {
 	moviesError: '',
 	movieLoading: false,
 	movieError: '',
+	searchQuery: '',
+	featuredMovie: {},
 };
 
-console.log(token);
-export const searchMovie = createAsyncThunk('movies/searchMovies', async (query) => {
+export const searchMovies = createAsyncThunk('movies/searchMovies', async (query) => {
 	const { data } = await axios.get(`${baseUrl}/search/movie?query=${query}`, {
 		headers: {
 			'Authorization': `Bearer ${token}`,
 		},
 		contentType: 'application/json',
 	});
-	console.log(data);
-	return data?.results;
+	console.log(data.query);
+	data.query = query;
+	return data;
 });
 
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
@@ -42,7 +44,6 @@ export const fetchMovie = createAsyncThunk('movies/fetchMovie', async (id) => {
 		},
 		contentType: 'application/json',
 	});
-	console.log(data);
 	return data;
 });
 
@@ -56,22 +57,44 @@ const movieSlice = createSlice({
 		});
 		builder.addCase(fetchMovies.fulfilled, (state, action) => {
 			state.moviesLoading = false;
+			state.movieError = '';
 			state.allMovies = action.payload;
+			state.featuredMovie = action.payload[0];
 		});
 		builder.addCase(fetchMovies.rejected, (state, action) => {
 			state.moviesLoading = false;
-			state.moviesError = action.payload;
+			state.allMovies = [];
+			state.moviesError = 'There was an error handling your request, please try again later.';
 		});
 		builder.addCase(fetchMovie.pending, (state) => {
 			state.movieLoading = true;
+			state.movieError = '';
 		});
 		builder.addCase(fetchMovie.fulfilled, (state, action) => {
+			state.movieError = '';
 			state.movieLoading = false;
 			state.movie = action.payload;
 		});
 		builder.addCase(fetchMovie.rejected, (state, action) => {
 			state.movieLoading = false;
-			state.movieError = action.payload;
+			state.movie = {};
+			state.movieError = 'There was an error fetching the details of this movie, please try again later.';
+		});
+		builder.addCase(searchMovies.pending, (state) => {
+			state.moviesLoading = true;
+			state.moviesError = '';
+		});
+		builder.addCase(searchMovies.fulfilled, (state, action) => {
+			state.moviesError = '';
+			state.moviesLoading = false;
+			state.allMovies = action.payload.results;
+			state.searchQuery = action.payload.query;
+			state.featuredMovie = action.payload.results[0];
+		});
+		builder.addCase(searchMovies.rejected, (state, action) => {
+			state.moviesLoading = false;
+			state.allMovies = [];
+			state.moviesError = 'There was an error handling your request, please try again later.';
 		});
 	},
 });
