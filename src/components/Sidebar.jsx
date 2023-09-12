@@ -36,12 +36,12 @@ const Sidebar = () => {
 		setActive(id);
 	};
 	return (
-		<aside className='bg-white text-[#666666] flex-1 min-w-64 flex flex-col items-center h-screen rounded-tr-[45px]  rounded-br-[45px] border-[rgba(0, 0, 0, 0.30)] border-r'>
+		<aside className='bg-white text-[#666666] flex-1 min-w-64 flex flex-col overflow-auto items-center h-screen rounded-tr-[45px]  rounded-br-[45px] border-[rgba(0, 0, 0, 0.30)] border-r'>
 			<div className='p-4 text-xl flex items-center gap-3 font-bold'>
 				<Image src='/assets/images/logo.svg' layout='intrisic' height={50} width={50} />
 				<h1 className='text-[#333333] text-[24px] font-bold'>Zik Movies</h1>
 			</div>
-			<ul className='flex-grow mt-10 w-full '>
+			<ul className='flex-grow mt-6 w-full '>
 				{navLinks.map((link) => (
 					<Link href={link?.path ? link?.path : '/'}>
 						<li onClick={() => handleNavClick(link.id)} key={link.id} className={`transition-all ease-in-out duration-300 p-[16px] text-xl cursor-pointer flex items-center gap-[15px] font-semibold  hover:bg-[rgba(190, 18, 60, 0.10)] ${active === link.id ? 'bg-[#BE123C1A]/10 text-[#BE123C]' : 'text-[#666666]'}`}>
@@ -56,7 +56,7 @@ const Sidebar = () => {
 				<p className='text-[#666666] text-sm font-[500]'>50k people are playing now</p>
 				<button className='text-[#BE123C] font-[500] text-sm p-2 flex w-[80%] justify-center items-center  bg-[#BE123C33]/20 rounded-[30px]'>Start playing</button>
 			</section>
-			<div className='p-4 mb-4 mt-auto w-full flex justify-center'>
+			<div className='p-4 w-full flex justify-center'>
 				<button className=' text-[#666666] px-4 py-2 text-[20px] flex items-center gap-[12px] rounded-full w-full'>
 					<MdOutlineLogout size={25} />
 					Logout
